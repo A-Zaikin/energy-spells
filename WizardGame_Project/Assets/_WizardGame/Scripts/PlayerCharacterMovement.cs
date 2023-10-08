@@ -41,7 +41,6 @@ namespace WizardGame
             if (!hasInput || Vector2.Dot(movement, input) < 0)
                 movement = Vector2.zero;
 
-            //movement += acceleration * Time.fixedDeltaTime * input;
             movement = Vector2.Lerp(movement, input, acceleration * Time.fixedDeltaTime);
             if (movement.magnitude > 1)
                 movement.Normalize();
@@ -54,9 +53,6 @@ namespace WizardGame
                     Quaternion.LookRotation(movement.AsXz()),
                     directionInterpolation);
             }
-
-            if (Input.GetMouseButtonDown(0))
-                animator.SetTrigger("spell1");
         }
     }
 }
