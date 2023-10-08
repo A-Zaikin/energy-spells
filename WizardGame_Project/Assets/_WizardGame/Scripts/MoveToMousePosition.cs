@@ -1,6 +1,7 @@
 using UnityEngine;
+using WizardGame.Extensions;
 
-namespace WizardGame
+namespace WizardGame.UnityUtils
 {
     public class MoveToMousePosition : MonoBehaviour
     {

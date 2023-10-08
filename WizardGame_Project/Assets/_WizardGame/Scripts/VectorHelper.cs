@@ -1,10 +1,12 @@
 ﻿using UnityEngine;
 
-namespace WizardGame
+namespace WizardGame.Extensions
 {
     public static class VectorHelper
     {
         public static Vector3 AsXz(this Vector2 vector) => new(vector.x, 0, vector.y);
+
+        public static Vector2 Xz(this Vector3 vector) => new(vector.x, vector.z);
 
         public static Vector3 WithY(this Vector3 vector, float y) => new(vector.x, y, vector.z);
 

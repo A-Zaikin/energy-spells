@@ -1,5 +1,5 @@
-using Unity.VisualScripting;
 using UnityEngine;
+using WizardGame.Extensions;
 
 namespace WizardGame
 {
