@@ -54,6 +54,9 @@ namespace WizardGame
                     Quaternion.LookRotation(movement.AsXz()),
                     directionInterpolation);
             }
+
+            if (Input.GetMouseButtonDown(0))
+                animator.SetTrigger("spell1");
         }
     }
 }
