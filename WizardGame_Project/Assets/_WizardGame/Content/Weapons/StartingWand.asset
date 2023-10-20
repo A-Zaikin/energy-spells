@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef97bd63dda367244a97e83c7b2accfb, type: 3}
   m_Name: StartingWand
   m_EditorClassIdentifier: 
-  <Model>k__BackingField: {fileID: 919132149155446097, guid: 22d0b35cbcf592047b63f16d562998c6,
+  <Model>k__BackingField: {fileID: 6792090047564353439, guid: d94c1138985242844905af20681ea094,
     type: 3}
