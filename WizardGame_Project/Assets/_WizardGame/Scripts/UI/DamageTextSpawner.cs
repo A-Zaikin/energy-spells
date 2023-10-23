@@ -1,4 +1,3 @@
-using System;
 using System.Globalization;
 using TMPro;
 using UnityEngine;
@@ -26,8 +25,9 @@ namespace WizardGame.UI
             if (currentCamera == null || canvas == null || damageTextPrefab == null)
                 return;
 
-            var screenPosition = currentCamera.WorldToScreenPoint(args.Position);
-            var damageText = Instantiate(damageTextPrefab, screenPosition, Quaternion.identity);
+            // var screenPosition = currentCamera.WorldToScreenPoint(args.Position);
+            // var damageText = Instantiate(damageTextPrefab, screenPosition, Quaternion.identity);
+            var damageText = Instantiate(damageTextPrefab, args.Position, currentCamera.transform.rotation);
             damageText.transform.parent = canvas.transform;
             damageText.text = args.Damage.ToString(CultureInfo.InvariantCulture);
         }

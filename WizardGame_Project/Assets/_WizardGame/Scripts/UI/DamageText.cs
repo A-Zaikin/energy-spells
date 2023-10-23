@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using WizardGame.Extensions;
 
@@ -21,7 +20,7 @@ namespace WizardGame.UI
 
         private void Update()
         {
-            transform.position += currentVelocity.AsXy();
+            transform.position += transform.rotation * currentVelocity.AsXy();
             currentVelocity += gravity * Time.deltaTime * Vector2.down;
 
             transform.localScale = VectorHelper.Create(sizeOverLifetime.Evaluate(life / lifetime));
