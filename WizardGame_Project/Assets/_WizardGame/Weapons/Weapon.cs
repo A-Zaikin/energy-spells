@@ -1,24 +1,40 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace WizardGame
 {
     public class Weapon : MonoBehaviour
     {
+        public static Weapon Current { get; private set; }
+
         [SerializeField] private GameObject projectilePrefab;
         [SerializeField] private GameObject firePoint;
         [SerializeField] private float startingImpulse;
+
+        public Dictionary<WeaponParameterType, float> Parameters { get; } = new();
+
+        private void Awake()
+        {
+            Current = this;
+        }
 
         private void Update()
         {
             if (projectilePrefab == null || firePoint == null)
                 return;
 
-            if (Input.GetMouseButtonDown(0))
+            if (InputManager.GetMouseButtonDown(0))
             {
-                var projectile = Instantiate(projectilePrefab, firePoint.transform.position, transform.rotation);
-                if (projectile.TryGetComponent<Rigidbody>(out var body))
-                {
+                var projectileObject = Instantiate(projectilePrefab, firePoint.transform.position, transform.rotation);
+
+                if (projectileObject.TryGetComponent<Rigidbody>(out var body))
                     body.AddForce(startingImpulse * (transform.rotation * Vector3.forward), ForceMode.Impulse);
+
+                if (projectileObject.TryGetComponent<Projectile>(out var projectile))
+                {
+                    foreach (var (type, value) in Parameters)
+                        projectile.ApplyParameter(type, value);
                 }
             }
         }

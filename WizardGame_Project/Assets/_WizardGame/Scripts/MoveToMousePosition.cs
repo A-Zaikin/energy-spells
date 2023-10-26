@@ -13,7 +13,7 @@ namespace WizardGame.UnityUtils
             if (camera == null)
                 return;
 
-            var mousePosition = camera.ScreenToWorldPoint(Input.mousePosition.WithZ(camera.nearClipPlane));
+            var mousePosition = camera.ScreenToWorldPoint(InputManager.MousePosition.WithZ(camera.nearClipPlane));
             var cameraPosition = camera.transform.position;
 
             var mouseDirection = mousePosition - cameraPosition;

@@ -29,7 +29,7 @@ namespace WizardGame.UI
             // var damageText = Instantiate(damageTextPrefab, screenPosition, Quaternion.identity);
             var damageText = Instantiate(damageTextPrefab, args.Position, currentCamera.transform.rotation);
             damageText.transform.parent = canvas.transform;
-            damageText.text = args.Damage.ToString(CultureInfo.InvariantCulture);
+            damageText.text = Mathf.RoundToInt(args.Damage).ToString();
         }
     }
 }

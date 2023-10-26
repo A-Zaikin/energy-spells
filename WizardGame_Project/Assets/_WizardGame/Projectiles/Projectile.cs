@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Animations;
 using WizardGame.Data;
@@ -8,14 +9,17 @@ namespace WizardGame
     {
         [SerializeField] private GameObject trailPrefab;
         [SerializeField] private Team team;
-        [SerializeField] private float damage;
 
+        private readonly Dictionary<WeaponParameterType, float> parameters = new();
         private PositionConstraint trailConstraint;
 
         private void OnCollisionEnter(Collision other)
         {
-            if (other.gameObject.TryGetComponent<Damageable>(out var damageable))
+            if (other.gameObject.TryGetComponent<Damageable>(out var damageable) &&
+                parameters.TryGetValue(WeaponParameterType.Damage, out var damage))
+            {
                 damageable.ReceiveDamage(damage, team);
+            }
 
             Destroy(gameObject);
         }
@@ -35,6 +39,11 @@ namespace WizardGame
         {
             if (trailConstraint != null)
                 trailConstraint.enabled = false;
+        }
+
+        public void ApplyParameter(WeaponParameterType type, float value)
+        {
+            parameters[type] = value;
         }
     }
 }

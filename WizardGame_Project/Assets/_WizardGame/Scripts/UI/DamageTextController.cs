@@ -23,7 +23,7 @@ namespace WizardGame.UI
 
         private void Update()
         {
-            transform.position += transform.rotation * currentVelocity.AsXy();
+            transform.position += transform.rotation * currentVelocity.AsXy() * Time.deltaTime;
 
             if (velocityOverLifetime != null)
                 currentVelocity = velocityOverLifetime.Evaluate(life / lifetime) * initialVelocity;
