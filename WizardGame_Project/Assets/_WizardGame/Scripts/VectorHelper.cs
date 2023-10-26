@@ -17,5 +17,8 @@ namespace WizardGame.Extensions
         public static Vector3 WithLength(this Vector3 vector, float length) => vector.normalized * length;
 
         public static Vector3 Create(float all) => new(all, all, all);
+
+        public static void ChangeLength(this ref Vector2 vector, float value) =>
+            vector = vector.normalized * MathHelper.Clamp0(vector.magnitude + value);
     }
 }
