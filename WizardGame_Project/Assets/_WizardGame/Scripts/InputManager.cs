@@ -12,6 +12,11 @@ namespace WizardGame
             return !Blocked && Input.GetMouseButtonDown(button);
         }
 
+        public static bool GetMouseButton(int button)
+        {
+            return !Blocked && Input.GetMouseButton(button);
+        }
+
         public static bool GetKeyDown(KeyCode key)
         {
             return !Blocked && Input.GetKeyDown(key);

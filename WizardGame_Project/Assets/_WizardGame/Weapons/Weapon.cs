@@ -12,6 +12,8 @@ namespace WizardGame
         [SerializeField] private GameObject firePoint;
         [SerializeField] private float startingImpulse;
 
+        private float timeSinceLastShot;
+
         public Dictionary<WeaponParameterType, float> Parameters { get; } = new();
 
         private void Awake()
@@ -24,7 +26,9 @@ namespace WizardGame
             if (projectilePrefab == null || firePoint == null)
                 return;
 
-            if (InputManager.GetMouseButtonDown(0))
+            if (InputManager.GetMouseButton(0) &&
+                Parameters.TryGetValue(WeaponParameterType.FireRate, out var fireRate) &&
+                timeSinceLastShot > 1 / fireRate)
             {
                 var projectileObject = Instantiate(projectilePrefab, firePoint.transform.position, transform.rotation);
 
@@ -36,7 +40,11 @@ namespace WizardGame
                     foreach (var (type, value) in Parameters)
                         projectile.ApplyParameter(type, value);
                 }
+
+                timeSinceLastShot = 0;
             }
+
+            timeSinceLastShot += Time.deltaTime;
         }
     }
 }
