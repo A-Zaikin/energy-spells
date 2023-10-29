@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using WizardGame.Extensions;
+using Random = UnityEngine.Random;
 
 namespace WizardGame
 {
@@ -30,10 +32,20 @@ namespace WizardGame
                 Parameters.TryGetValue(WeaponParameterType.FireRate, out var fireRate) &&
                 timeSinceLastShot > 1 / fireRate)
             {
-                var projectileObject = Instantiate(projectilePrefab, firePoint.transform.position, transform.rotation);
+                var angle = Vector2.SignedAngle(Vector2.right, transform.forward.Xz());
+
+                if (Parameters.TryGetValue(WeaponParameterType.Spread, out var spread))
+                    angle += Random.Range(-spread, spread);
+
+                var angleInRadians = angle * Mathf.Deg2Rad;
+
+                var direction = new Vector2(Mathf.Cos(angleInRadians), Mathf.Sin(angleInRadians)).normalized;
+                var rotation = Quaternion.FromToRotation(Vector3.forward, direction.AsXz());
+
+                var projectileObject = Instantiate(projectilePrefab, firePoint.transform.position, rotation);
 
                 if (projectileObject.TryGetComponent<Rigidbody>(out var body))
-                    body.AddForce(startingImpulse * (transform.rotation * Vector3.forward), ForceMode.Impulse);
+                    body.AddForce(startingImpulse * (rotation * Vector3.forward), ForceMode.Impulse);
 
                 if (projectileObject.TryGetComponent<Projectile>(out var projectile))
                 {
