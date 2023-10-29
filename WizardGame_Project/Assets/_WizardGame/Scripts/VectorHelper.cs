@@ -14,6 +14,8 @@ namespace WizardGame.Extensions
 
         public static Vector3 WithZ(this Vector3 vector, float z) => new(vector.x, vector.y, z);
 
+        public static Vector3 WithXz(this Vector3 vector, Vector2 xz) => new(xz.x, vector.y, xz.y);
+
         public static Vector3 WithLength(this Vector3 vector, float length) => vector.normalized * length;
 
         public static Vector3 Create(float all) => new(all, all, all);

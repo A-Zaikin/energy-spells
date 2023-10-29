@@ -10,6 +10,7 @@ namespace WizardGame
         Gravity,
         Bounces,
         PelletCount,
-        PelletSpread
+        PelletSpread,
+        Lifetime
     }
 }

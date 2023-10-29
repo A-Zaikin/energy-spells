@@ -16,6 +16,7 @@ namespace WizardGame
         private PositionConstraint trailConstraint;
 
         private int bounceCount;
+        private float life;
 
         private void OnCollisionEnter(Collision collision)
         {
@@ -68,6 +69,18 @@ namespace WizardGame
                 if (parameters.TryGetValue(WeaponParameterType.AccelerationMultiplier, out var accelerationMultiplier))
                     body.velocity *= accelerationMultiplier;
             }
+        }
+
+        private void Update()
+        {
+            if (parameters.TryGetValue(WeaponParameterType.Lifetime, out var lifetime) &&
+                life > lifetime)
+            {
+                Destroy(gameObject);
+                return;
+            }
+
+            life += Time.deltaTime;
         }
 
         public void ApplyParameter(WeaponParameterType type, float value)
