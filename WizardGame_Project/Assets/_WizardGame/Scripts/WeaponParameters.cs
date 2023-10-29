@@ -6,6 +6,7 @@ namespace WizardGame
         FireRate,
         Spread,
         Speed,
-        AccelerationMultiplier
+        AccelerationMultiplier,
+        Gravity
     }
 }

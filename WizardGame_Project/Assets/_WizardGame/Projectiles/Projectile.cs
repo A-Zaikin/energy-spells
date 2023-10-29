@@ -45,10 +45,13 @@ namespace WizardGame
 
         private void FixedUpdate()
         {
-            if (body != null &&
-                parameters.TryGetValue(WeaponParameterType.AccelerationMultiplier, out var accelerationMultiplier))
+            if (body != null)
             {
-                body.velocity *= accelerationMultiplier;
+                if (parameters.TryGetValue(WeaponParameterType.Gravity, out var gravity))
+                    body.velocity += Vector3.down * gravity;
+
+                if (parameters.TryGetValue(WeaponParameterType.AccelerationMultiplier, out var accelerationMultiplier))
+                    body.velocity *= accelerationMultiplier;
             }
         }
 
