@@ -12,7 +12,6 @@ namespace WizardGame
 
         [SerializeField] private GameObject projectilePrefab;
         [SerializeField] private GameObject firePoint;
-        [SerializeField] private float startingImpulse;
 
         private float timeSinceLastShot;
 
@@ -44,8 +43,11 @@ namespace WizardGame
 
                 var projectileObject = Instantiate(projectilePrefab, firePoint.transform.position, rotation);
 
-                if (projectileObject.TryGetComponent<Rigidbody>(out var body))
-                    body.AddForce(startingImpulse * (rotation * Vector3.forward), ForceMode.Impulse);
+                if (projectileObject.TryGetComponent<Rigidbody>(out var body) &&
+                    Parameters.TryGetValue(WeaponParameterType.Speed, out var speed))
+                {
+                    body.AddForce(speed * (rotation * Vector3.forward), ForceMode.Impulse);
+                }
 
                 if (projectileObject.TryGetComponent<Projectile>(out var projectile))
                 {

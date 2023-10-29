@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6484969688303267136}
   - component: {fileID: 7870843559349331103}
   - component: {fileID: 2667144827109471259}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -117,7 +117,7 @@ GameObject:
   - component: {fileID: 7411610404081919194}
   - component: {fileID: 2882282728450095471}
   - component: {fileID: 3059778470622983660}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Projectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -182,7 +182,7 @@ MonoBehaviour:
   trailPrefab: {fileID: 6501133396998350861, guid: 4ef105f724f60ce409aaf06db11c1c44,
     type: 3}
   team: {fileID: 11400000, guid: 7347946b488398f4bac577e7e86eb67b, type: 2}
-  damage: 5
+  body: {fileID: 7411610404081919194}
 --- !u!114 &3059778470622983660
 MonoBehaviour:
   m_ObjectHideFlags: 0

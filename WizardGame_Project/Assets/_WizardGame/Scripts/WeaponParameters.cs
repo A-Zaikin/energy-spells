@@ -5,5 +5,7 @@ namespace WizardGame
         Damage,
         FireRate,
         Spread,
+        Speed,
+        AccelerationMultiplier
     }
 }

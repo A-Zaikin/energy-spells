@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Animations;
@@ -9,6 +10,7 @@ namespace WizardGame
     {
         [SerializeField] private GameObject trailPrefab;
         [SerializeField] private Team team;
+        [SerializeField] private Rigidbody body;
 
         private readonly Dictionary<WeaponParameterType, float> parameters = new();
         private PositionConstraint trailConstraint;
@@ -39,6 +41,15 @@ namespace WizardGame
         {
             if (trailConstraint != null)
                 trailConstraint.enabled = false;
+        }
+
+        private void FixedUpdate()
+        {
+            if (body != null &&
+                parameters.TryGetValue(WeaponParameterType.AccelerationMultiplier, out var accelerationMultiplier))
+            {
+                body.velocity *= accelerationMultiplier;
+            }
         }
 
         public void ApplyParameter(WeaponParameterType type, float value)
