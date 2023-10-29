@@ -15,12 +15,27 @@ namespace WizardGame
         private readonly Dictionary<WeaponParameterType, float> parameters = new();
         private PositionConstraint trailConstraint;
 
-        private void OnCollisionEnter(Collision other)
+        private int bounceCount;
+
+        private void OnCollisionEnter(Collision collision)
         {
-            if (other.gameObject.TryGetComponent<Damageable>(out var damageable) &&
+            if (collision.gameObject.TryGetComponent<Damageable>(out var damageable) &&
                 parameters.TryGetValue(WeaponParameterType.Damage, out var damage))
             {
                 damageable.ReceiveDamage(damage, team);
+            }
+
+            if (parameters.TryGetValue(WeaponParameterType.Bounces, out var bounces) && bounceCount < bounces)
+            {
+                bounceCount++;
+
+                if (body != null && collision.contactCount > 0)
+                {
+                    var contact = collision.GetContact(0);
+                    body.velocity = Vector3.Reflect(-collision.relativeVelocity, contact.normal);
+                }
+
+                return;
             }
 
             Destroy(gameObject);
