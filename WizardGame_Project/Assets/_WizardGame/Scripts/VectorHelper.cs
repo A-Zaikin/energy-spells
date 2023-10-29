@@ -20,5 +20,11 @@ namespace WizardGame.Extensions
 
         public static void ChangeLength(this ref Vector2 vector, float value) =>
             vector = vector.normalized * MathHelper.Clamp0(vector.magnitude + value);
+
+        public static Vector2 CreateFromAngle(float angle)
+        {
+            var angleInRadians = angle * Mathf.Deg2Rad;
+            return new Vector2(Mathf.Cos(angleInRadians), Mathf.Sin(angleInRadians));
+        }
     }
 }

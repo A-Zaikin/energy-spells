@@ -4,10 +4,12 @@ namespace WizardGame
     {
         Damage,
         FireRate,
-        Spread,
+        RandomSpread,
         Speed,
         AccelerationMultiplier,
         Gravity,
-        Bounces
+        Bounces,
+        PelletCount,
+        PelletSpread
     }
 }

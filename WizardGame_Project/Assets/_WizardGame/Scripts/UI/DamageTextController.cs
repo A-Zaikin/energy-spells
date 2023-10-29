@@ -21,8 +21,8 @@ namespace WizardGame.UI
 
         private void Awake()
         {
-            var angle = (90 + Random.Range(-maxAngle, maxAngle)) * Mathf.Deg2Rad;
-            var direction = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)).normalized;
+            var angle = 90 + Random.Range(-maxAngle, maxAngle);
+            var direction = VectorHelper.CreateFromAngle(angle);
             initialVelocity = initialSpeed * direction;
             currentVelocity = initialVelocity;
         }

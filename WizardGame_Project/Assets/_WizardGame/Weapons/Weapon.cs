@@ -31,34 +31,63 @@ namespace WizardGame
                 Parameters.TryGetValue(WeaponParameterType.FireRate, out var fireRate) &&
                 timeSinceLastShot > 1 / fireRate)
             {
-                var angle = Vector2.SignedAngle(Vector2.right, transform.forward.Xz());
+                var weaponAngle = Vector2.SignedAngle(Vector2.right, transform.forward.Xz());
 
-                if (Parameters.TryGetValue(WeaponParameterType.Spread, out var spread))
-                    angle += Random.Range(-spread, spread);
-
-                var angleInRadians = angle * Mathf.Deg2Rad;
-
-                var direction = new Vector2(Mathf.Cos(angleInRadians), Mathf.Sin(angleInRadians)).normalized;
-                var rotation = Quaternion.FromToRotation(Vector3.forward, direction.AsXz());
-
-                var projectileObject = Instantiate(projectilePrefab, firePoint.transform.position, rotation);
-
-                if (projectileObject.TryGetComponent<Rigidbody>(out var body) &&
-                    Parameters.TryGetValue(WeaponParameterType.Speed, out var speed))
+                if (Parameters.TryGetValue(WeaponParameterType.PelletCount, out var pellets) &&
+                    Parameters.TryGetValue(WeaponParameterType.PelletSpread, out var pelletSpread))
                 {
-                    body.AddForce(speed * (rotation * Vector3.forward), ForceMode.Impulse);
-                }
+                    var pelletCount = Mathf.RoundToInt(pellets);
+                    if (pelletCount % 2 == 0)
+                    {
+                        for (var i = 0; i < pelletCount; i++)
+                        {
+                            // ReSharper disable once PossibleLossOfFraction
+                            var offset = pelletSpread / 2 + (pelletCount / 2 - 1) * pelletSpread;
+                            var angle = weaponAngle - offset + pelletSpread * i;
 
-                if (projectileObject.TryGetComponent<Projectile>(out var projectile))
-                {
-                    foreach (var (type, value) in Parameters)
-                        projectile.ApplyParameter(type, value);
+                            ShootPellet(angle);
+                        }
+                    }
+                    else
+                    {
+                        for (var i = 0; i < pelletCount; i++)
+                        {
+                            // ReSharper disable once PossibleLossOfFraction
+                            var offset = pelletCount / 2 * pelletSpread;
+                            var angle = weaponAngle - offset + pelletSpread * i;
+
+                            ShootPellet(angle);
+                        }
+                    }
                 }
 
                 timeSinceLastShot = 0;
             }
 
             timeSinceLastShot += Time.deltaTime;
+        }
+
+        private void ShootPellet(float angle)
+        {
+            if (Parameters.TryGetValue(WeaponParameterType.RandomSpread, out var spread))
+                angle += Random.Range(-spread, spread);
+
+            var direction = VectorHelper.CreateFromAngle(angle);
+            var rotation = Quaternion.FromToRotation(Vector3.forward, direction.AsXz());
+
+            var projectileObject = Instantiate(projectilePrefab, firePoint.transform.position, rotation);
+
+            if (projectileObject.TryGetComponent<Rigidbody>(out var body) &&
+                Parameters.TryGetValue(WeaponParameterType.Speed, out var speed))
+            {
+                body.AddForce(speed * (rotation * Vector3.forward), ForceMode.Impulse);
+            }
+
+            if (projectileObject.TryGetComponent<Projectile>(out var projectile))
+            {
+                foreach (var (type, value) in Parameters)
+                    projectile.ApplyParameter(type, value);
+            }
         }
     }
 }
