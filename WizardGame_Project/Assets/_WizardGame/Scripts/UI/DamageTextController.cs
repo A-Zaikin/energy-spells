@@ -7,17 +7,23 @@ namespace WizardGame.UI
     public class DamageTextController : MonoBehaviour
     {
         [SerializeField] private float lifetime;
-        [SerializeField] private Vector2 initialVelocity;
+        [SerializeField] private float initialSpeed;
+        [SerializeField] private float maxAngle;
+        
         [SerializeField] private AnimationCurve sizeOverLifetime;
         [SerializeField] private AnimationCurve alphaOverLifetime;
         [SerializeField] private AnimationCurve velocityOverLifetime;
         [SerializeField] private CanvasGroup canvasGroup;
 
+        private Vector2 initialVelocity;
         private Vector2 currentVelocity;
         private float life;
 
         private void Awake()
         {
+            var angle = (90 + Random.Range(-maxAngle, maxAngle)) * Mathf.Deg2Rad;
+            var direction = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)).normalized;
+            initialVelocity = initialSpeed * direction;
             currentVelocity = initialVelocity;
         }
 
