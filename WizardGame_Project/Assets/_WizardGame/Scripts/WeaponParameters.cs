@@ -11,6 +11,9 @@ namespace WizardGame
         Bounces,
         PelletCount,
         PelletSpread,
-        Lifetime
+        Lifetime,
+
+        // ReSharper disable once InconsistentNaming
+        NUM
     }
 }

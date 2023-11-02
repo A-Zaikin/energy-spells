@@ -15,7 +15,7 @@ namespace WizardGame
 
         private float timeSinceLastShot;
 
-        public Dictionary<WeaponParameterType, float> Parameters { get; } = new();
+        public Dictionary<WeaponParameterType, Modifiable> Parameters { get; } = new();
 
         private void Awake()
         {

@@ -5,7 +5,7 @@ using Random = UnityEngine.Random;
 
 namespace WizardGame
 {
-    public class TestEnemyRespawner : MonoBehaviour
+    public class TestEnemyRespawner : ExtendedBehaviour
     {
         [SerializeField] private LifecycleEvents enemyPrefab;
         [SerializeField] private float radius;
@@ -21,10 +21,12 @@ namespace WizardGame
         {
             var position = Random.insideUnitCircle * radius;
 
-            var enemy = Instantiate(enemyPrefab);
-            var enemyTransform = enemy.transform;
-            enemyTransform.position = enemyTransform.position.WithXz(position);
-            enemy.OnDestroyed += SpawnNewEnemy;
+            if (Spawn(enemyPrefab, out var enemy))
+            {
+                var enemyTransform = enemy.transform;
+                enemyTransform.position = enemyTransform.position.WithXz(position);
+                enemy.OnDestroyed += SpawnNewEnemy;
+            }
         }
     }
 }

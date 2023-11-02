@@ -18,7 +18,7 @@ namespace WizardGame.UI
 
         public static void SetWeaponParameter(WeaponParameterType type, float value)
         {
-            Weapon.Current.Parameters[type] = value;
+            Weapon.Current.Parameters[type] = new Modifiable(value);
         }
     }
 }
