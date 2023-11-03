@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.Serialization;
-using WizardGame.Extensions;
+using WizardGame.Utility;
 
 namespace WizardGame.UI
 {

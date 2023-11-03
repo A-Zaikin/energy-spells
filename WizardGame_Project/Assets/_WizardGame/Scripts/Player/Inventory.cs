@@ -1,11 +1,12 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using WizardGame.Utility;
 
 namespace WizardGame
 {
     public class Inventory : MonoBehaviour
     {
-        public List<WeaponMod> WeaponMods { get; } = new();
+        public static Inventory Current;
+        public ObservableList<WeaponMod> WeaponMods { get; } = new();
 
         public void AddMod(WeaponMod mod)
         {
@@ -15,6 +16,11 @@ namespace WizardGame
                 if (Weapon.Current.Parameters.TryGetValue(modifier.Parameter, out var parameter))
                     parameter.AddModifier(modifier.Value);
             }
+        }
+
+        private void Awake()
+        {
+            Current = this;
         }
     }
 }

@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
-using WizardGame.Extensions;
+using WizardGame.Utility;
 using Random = UnityEngine.Random;
 
 namespace WizardGame

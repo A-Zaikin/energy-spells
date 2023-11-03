@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace WizardGame.Extensions
+namespace WizardGame.Utility
 {
     public static class VectorHelper
     {
