@@ -17,6 +17,18 @@ namespace WizardGame
 
         public Dictionary<WeaponParameterType, Modifiable> Parameters { get; } = new();
 
+        public OrderedContainer<WeaponMod> Mods { get; } = new(5);
+
+        public void AddMod(WeaponMod mod)
+        {
+            Mods.Add(mod);
+            foreach (var modifier in mod.Modifiers)
+            {
+                if (Parameters.TryGetValue(modifier.Parameter, out var parameter))
+                    parameter.AddModifier(modifier.Value);
+            }
+        }
+
         private void Awake()
         {
             Current = this;

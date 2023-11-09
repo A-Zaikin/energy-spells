@@ -83,7 +83,11 @@ namespace WizardGame.Utility
         public T this[int index]
         {
             get => list[index];
-            set => list[index] = value;
+            set
+            {
+                list[index] = value;
+                observe?.Invoke(this);
+            }
         }
     }
 }

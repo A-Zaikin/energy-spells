@@ -9,6 +9,7 @@ namespace WizardGame.UI
     {
         [SerializeField] private TextMeshProUGUI text;
         [SerializeField] private Image image;
+        [SerializeField] private Canvas canvas;
 
         public WeaponMod Mod { get; private set; }
 
@@ -17,6 +18,12 @@ namespace WizardGame.UI
         public override void Setup(WeaponMod mod)
         {
             Mod = mod;
+
+            if (image != null)
+                image.raycastTarget = true;
+
+            if (canvas != null)
+                canvas.sortingOrder = 1;
 
             if (text != null)
             {
@@ -32,6 +39,9 @@ namespace WizardGame.UI
             if (image != null)
                 image.raycastTarget = false;
 
+            if (canvas != null)
+                canvas.sortingOrder = 2;
+
             startPosition = transform.position;
         }
 
@@ -44,6 +54,9 @@ namespace WizardGame.UI
         {
             if (image != null)
                 image.raycastTarget = true;
+
+            if (canvas != null)
+                canvas.sortingOrder = 1;
 
             transform.position = startPosition;
         }

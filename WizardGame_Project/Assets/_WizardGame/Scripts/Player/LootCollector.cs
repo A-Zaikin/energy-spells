@@ -11,7 +11,7 @@ namespace WizardGame
             if (other.TryGetComponent<Loot>(out var loot))
             {
                 var mod = new WeaponMod(loot.Quality);
-                inventory.AddMod(mod);
+                inventory.WeaponMods.Add(mod);
                 Destroy(loot.gameObject);
             }
         }
