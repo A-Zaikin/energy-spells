@@ -19,6 +19,8 @@ namespace WizardGame
 
         public OrderedContainer<WeaponMod> Mods { get; } = new(5);
 
+        private readonly List<Modification> modifications = new();
+
         public void AddMod(WeaponMod mod)
         {
             Mods.Add(mod);
@@ -32,6 +34,34 @@ namespace WizardGame
         private void Awake()
         {
             Current = this;
+        }
+
+        private void OnEnable()
+        {
+            Mods.Observe += ObserveMods;
+        }
+
+        private void OnDisable()
+        {
+            Mods.Observe -= ObserveMods;
+        }
+
+        private void ObserveMods(OrderedContainer<WeaponMod> mods)
+        {
+            foreach (var modification in modifications)
+                modification.Dispose();
+
+            foreach (var mod in mods)
+            {
+                if (mod == null)
+                    continue;
+
+                foreach (var modifier in mod.Modifiers)
+                {
+                    if (Parameters.TryGetValue(modifier.Parameter, out var parameter))
+                        modifications.Add(parameter.AddModifier(modifier.Value));
+                }
+            }
         }
 
         private void Update()
