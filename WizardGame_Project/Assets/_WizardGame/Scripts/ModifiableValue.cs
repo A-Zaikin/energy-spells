@@ -8,16 +8,16 @@ namespace WizardGame
     {
         public float BaseValue;
 
-        public readonly List<Modifier> Modifiers = new();
+        public readonly List<Modification> Modifiers = new();
 
         public Modifiable(float baseValue)
         {
             BaseValue = baseValue;
         }
 
-        public Modifier AddModifier(float value)
+        public Modification AddModifier(float value)
         {
-            return new Modifier(this, value);
+            return new Modification(this, value);
         }
 
         public float Value
@@ -32,13 +32,13 @@ namespace WizardGame
         public static implicit operator float(Modifiable modifiable) => modifiable.Value;
     }
 
-    public class Modifier : IDisposable
+    public class Modification : IDisposable
     {
         public float Value;
 
         private readonly Modifiable modifiable;
 
-        public Modifier(Modifiable modifiable, float value)
+        public Modification(Modifiable modifiable, float value)
         {
             Value = value;
             modifiable.Modifiers.Add(this);

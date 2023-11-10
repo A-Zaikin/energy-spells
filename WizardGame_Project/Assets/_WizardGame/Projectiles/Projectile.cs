@@ -1,18 +1,15 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Animations;
-using WizardGame.Data;
 
 namespace WizardGame
 {
     public class Projectile : MonoBehaviour
     {
+        [SerializeField] private ParameterContainer parameters;
         [SerializeField] private GameObject trailPrefab;
-        [SerializeField] private Team team;
         [SerializeField] private Rigidbody body;
 
-        private readonly Dictionary<WeaponParameterType, float> parameters = new();
         private PositionConstraint trailConstraint;
 
         private int bounceCount;
@@ -20,13 +17,7 @@ namespace WizardGame
 
         private void OnCollisionEnter(Collision collision)
         {
-            if (collision.gameObject.TryGetComponent<Damageable>(out var damageable) &&
-                parameters.TryGetValue(WeaponParameterType.Damage, out var damage))
-            {
-                damageable.ReceiveDamage(damage, team);
-            }
-
-            if (parameters.TryGetValue(WeaponParameterType.Bounces, out var bounces) && bounceCount < bounces)
+            if (parameters != null && parameters.Get(ParameterType.Bounces, out var bounces) && bounceCount < bounces)
             {
                 bounceCount++;
 
@@ -63,17 +54,17 @@ namespace WizardGame
         {
             if (body != null)
             {
-                if (parameters.TryGetValue(WeaponParameterType.Gravity, out var gravity))
+                if (parameters != null && parameters.Get(ParameterType.Gravity, out var gravity))
                     body.velocity += Vector3.down * gravity;
 
-                if (parameters.TryGetValue(WeaponParameterType.AccelerationMultiplier, out var accelerationMultiplier))
+                if (parameters != null && parameters.Get(ParameterType.AccelerationMultiplier, out var accelerationMultiplier))
                     body.velocity *= accelerationMultiplier;
             }
         }
 
         private void Update()
         {
-            if (parameters.TryGetValue(WeaponParameterType.Lifetime, out var lifetime) &&
+            if (parameters != null && parameters.Get(ParameterType.Lifetime, out var lifetime) &&
                 life > lifetime)
             {
                 Destroy(gameObject);
@@ -81,11 +72,6 @@ namespace WizardGame
             }
 
             life += Time.deltaTime;
-        }
-
-        public void ApplyParameter(WeaponParameterType type, float value)
-        {
-            parameters[type] = value;
         }
     }
 }

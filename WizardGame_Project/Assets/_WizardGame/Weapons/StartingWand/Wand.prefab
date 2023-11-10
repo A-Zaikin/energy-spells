@@ -80,7 +80,7 @@ MonoBehaviour:
   projectilePrefab: {fileID: 7411610404081919188, guid: 96ffafcb62eb7cf44a798684e4f34ae4,
     type: 3}
   firePoint: {fileID: 2528152166313936652}
-  startingImpulse: 45
+  team: {fileID: 11400000, guid: 7347946b488398f4bac577e7e86eb67b, type: 2}
 --- !u!1 &6792090048787874208
 GameObject:
   m_ObjectHideFlags: 0

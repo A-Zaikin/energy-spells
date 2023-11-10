@@ -1,6 +1,6 @@
 namespace WizardGame
 {
-    public enum WeaponParameterType
+    public enum ParameterType
     {
         Damage,
         FireRate,

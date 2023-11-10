@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using WizardGame.Data;
 using WizardGame.Utility;
 using Random = UnityEngine.Random;
 
@@ -10,11 +11,13 @@ namespace WizardGame
         [SerializeField] private LifecycleEvents enemyPrefab;
         [SerializeField] private float radius;
         [SerializeField] private List<LifecycleEvents> startingEnemies;
+        [SerializeField] private float damage;
+        [SerializeField] private Team team;
 
         private void Start()
         {
             foreach (var enemy in startingEnemies)
-                enemy.OnDestroyed += SpawnNewEnemy;
+                SetupEnemy(enemy);
         }
 
         private void SpawnNewEnemy()
@@ -25,8 +28,20 @@ namespace WizardGame
             {
                 var enemyTransform = enemy.transform;
                 enemyTransform.position = enemyTransform.position.WithXz(position);
-                enemy.OnDestroyed += SpawnNewEnemy;
+
+                SetupEnemy(enemy);
             }
+        }
+
+        private void SetupEnemy(LifecycleEvents enemy)
+        {
+            if (enemy.TryGetComponent<ParameterContainer>(out var parameters))
+                parameters.SetupWithValues(new() { [ParameterType.Damage] = damage });
+
+            if (enemy.TryGetComponent<TeamContainer>(out var teamContainer))
+                teamContainer.Setup(team);
+
+            enemy.OnDestroyed += SpawnNewEnemy;
         }
     }
 }

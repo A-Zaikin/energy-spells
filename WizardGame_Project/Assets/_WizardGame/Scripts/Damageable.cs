@@ -13,7 +13,7 @@ namespace WizardGame
 
         public bool ReceiveDamage(float damage, Team incomingTeam)
         {
-            if (health == null || incomingTeam == Team)
+            if (health == null || incomingTeam == null || incomingTeam == Team)
                 return false;
 
             health.Value -= damage;

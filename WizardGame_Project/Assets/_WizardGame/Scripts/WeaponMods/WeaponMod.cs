@@ -26,18 +26,18 @@ namespace WizardGame
 
         public IReadOnlyList<Modifier> Modifiers => modifiers;
 
-        private static WeaponParameterType GetRandomParameter()
+        private static ParameterType GetRandomParameter()
         {
-            var random = Random.Range(0, (int)WeaponParameterType.NUM);
-            return (WeaponParameterType)random;
+            var random = Random.Range(0, (int)ParameterType.NUM);
+            return (ParameterType)random;
         }
 
         public readonly struct Modifier
         {
-            public readonly WeaponParameterType Parameter;
+            public readonly ParameterType Parameter;
             public readonly float Value;
 
-            public Modifier(WeaponParameterType parameter, float value)
+            public Modifier(ParameterType parameter, float value)
             {
                 Parameter = parameter;
                 Value = value;

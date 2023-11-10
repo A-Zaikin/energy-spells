@@ -21,6 +21,8 @@ namespace WizardGame
             }
         }
 
+        public float Max => max;
+
         private void Awake()
         {
             value = max;

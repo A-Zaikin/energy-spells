@@ -1,6 +1,6 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
+using WizardGame.Data;
 using WizardGame.Utility;
 using Random = UnityEngine.Random;
 
@@ -12,10 +12,12 @@ namespace WizardGame
 
         [SerializeField] private GameObject projectilePrefab;
         [SerializeField] private GameObject firePoint;
+        [SerializeField] private Team team;
+
 
         private float timeSinceLastShot;
 
-        public Dictionary<WeaponParameterType, Modifiable> Parameters { get; } = new();
+        public Dictionary<ParameterType, Modifiable> Parameters { get; } = new();
 
         public OrderedContainer<WeaponMod> Mods { get; } = new(5);
 
@@ -70,13 +72,13 @@ namespace WizardGame
                 return;
 
             if (InputManager.GetMouseButton(0) &&
-                Parameters.TryGetValue(WeaponParameterType.FireRate, out var fireRate) &&
+                Parameters.TryGetValue(ParameterType.FireRate, out var fireRate) &&
                 timeSinceLastShot > 1 / fireRate)
             {
                 var weaponAngle = Vector2.SignedAngle(Vector2.right, transform.forward.Xz());
 
-                if (Parameters.TryGetValue(WeaponParameterType.PelletCount, out var pellets) &&
-                    Parameters.TryGetValue(WeaponParameterType.PelletSpread, out var pelletSpread))
+                if (Parameters.TryGetValue(ParameterType.PelletCount, out var pellets) &&
+                    Parameters.TryGetValue(ParameterType.PelletSpread, out var pelletSpread))
                 {
                     var pelletCount = Mathf.RoundToInt(pellets);
                     if (pelletCount % 2 == 0)
@@ -111,7 +113,7 @@ namespace WizardGame
 
         private void ShootPellet(float angle)
         {
-            if (Parameters.TryGetValue(WeaponParameterType.RandomSpread, out var spread))
+            if (Parameters.TryGetValue(ParameterType.RandomSpread, out var spread))
                 angle += Random.Range(-spread, spread);
 
             var direction = VectorHelper.CreateFromAngle(angle);
@@ -120,16 +122,16 @@ namespace WizardGame
             var projectileObject = Instantiate(projectilePrefab, firePoint.transform.position, rotation);
 
             if (projectileObject.TryGetComponent<Rigidbody>(out var body) &&
-                Parameters.TryGetValue(WeaponParameterType.Speed, out var speed))
+                Parameters.TryGetValue(ParameterType.Speed, out var speed))
             {
                 body.AddForce(speed * (rotation * Vector3.forward), ForceMode.Impulse);
             }
 
-            if (projectileObject.TryGetComponent<Projectile>(out var projectile))
-            {
-                foreach (var (type, value) in Parameters)
-                    projectile.ApplyParameter(type, value);
-            }
+            if (projectileObject.TryGetComponent<ParameterContainer>(out var parameters))
+                parameters.Setup(Parameters);
+
+            if (projectileObject.TryGetComponent<TeamContainer>(out var teamContainer))
+                teamContainer.Setup(team);
         }
     }
 }

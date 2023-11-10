@@ -117,6 +117,9 @@ GameObject:
   - component: {fileID: 7411610404081919194}
   - component: {fileID: 2882282728450095471}
   - component: {fileID: 3059778470622983660}
+  - component: {fileID: 5983387326456919285}
+  - component: {fileID: 4889634593111415429}
+  - component: {fileID: 5775647946591436520}
   m_Layer: 7
   m_Name: Projectile
   m_TagString: Untagged
@@ -179,9 +182,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73e8c58c4d7c68648940880b7befe8b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  parameters: {fileID: 5983387326456919285}
   trailPrefab: {fileID: 6501133396998350861, guid: 4ef105f724f60ce409aaf06db11c1c44,
     type: 3}
-  team: {fileID: 11400000, guid: 7347946b488398f4bac577e7e86eb67b, type: 2}
   body: {fileID: 7411610404081919194}
 --- !u!114 &3059778470622983660
 MonoBehaviour:
@@ -196,3 +199,41 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   effect: {fileID: 7253506168972874075, guid: f2eadec7991eef4478d820a4371cc138, type: 3}
+--- !u!114 &5983387326456919285
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7411610404081919188}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a0ee850e48b44b684c9e3df48287e5b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4889634593111415429
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7411610404081919188}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d314194219b40ffaea29ecce5db1b81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5775647946591436520
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7411610404081919188}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34193fadb9bb0c1449bd9f7228e05221, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parameters: {fileID: 5983387326456919285}
+  team: {fileID: 4889634593111415429}

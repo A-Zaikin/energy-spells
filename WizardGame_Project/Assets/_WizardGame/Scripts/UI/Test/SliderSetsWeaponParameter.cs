@@ -7,7 +7,7 @@ namespace WizardGame.UI
     {
         [SerializeField] private Slider slider;
         [SerializeField] private TestWindow window;
-        [SerializeField] private WeaponParameterType type;
+        [SerializeField] private ParameterType type;
 
         private void OnEnable()
         {
