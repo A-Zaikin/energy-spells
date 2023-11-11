@@ -21,7 +21,12 @@ namespace WizardGame
             this.weaponsData = weaponsData;
 
             foreach (var data in weaponsData)
+            {
                 weaponModels[data] = Instantiate(data.Model, transform);
+                
+                if (weaponModels[data].TryGetComponent<Weapon>(out var weapon))
+                    weapon.Setup(data);
+            }
         }
 
         private void Update()

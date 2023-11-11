@@ -23,13 +23,11 @@ namespace WizardGame
 
         private readonly List<Modification> modifications = new();
 
-        public void AddMod(WeaponMod mod)
+        public void Setup(WeaponData data)
         {
-            Mods.Add(mod);
-            foreach (var modifier in mod.Modifiers)
+            foreach (var (type, value) in data.StartingParameters)
             {
-                if (Parameters.TryGetValue(modifier.Parameter, out var parameter))
-                    parameter.AddModifier(modifier.Value);
+                Parameters[type] = new Modifiable(value);
             }
         }
 

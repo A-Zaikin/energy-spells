@@ -14,3 +14,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Model>k__BackingField: {fileID: 6792090047564353439, guid: d94c1138985242844905af20681ea094,
     type: 3}
+  StartingParameters:
+    _serializedList:
+    - Key: 0
+      Value: 5
+    - Key: 1
+      Value: 5
+    - Key: 2
+      Value: 5
+    - Key: 3
+      Value: 20
+    - Key: 4
+      Value: 1
+    - Key: 5
+      Value: 1
+    - Key: 6
+      Value: 0
+    - Key: 7
+      Value: 1
+    - Key: 8
+      Value: 15
+    - Key: 9
+      Value: 5
