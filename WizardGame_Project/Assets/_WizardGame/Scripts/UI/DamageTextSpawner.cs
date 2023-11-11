@@ -1,6 +1,7 @@
 using System.Globalization;
 using TMPro;
 using UnityEngine;
+using WizardGame.Data;
 
 namespace WizardGame.UI
 {
@@ -9,6 +10,7 @@ namespace WizardGame.UI
         [SerializeField] private Canvas canvas;
         [SerializeField] private TextMeshProUGUI damageTextPrefab;
         [SerializeField] private Camera currentCamera;
+        [SerializeField] private Team playerTeam;
 
         private void OnEnable()
         {
@@ -30,6 +32,9 @@ namespace WizardGame.UI
             var damageText = Instantiate(damageTextPrefab, args.Position, currentCamera.transform.rotation);
             damageText.transform.parent = canvas.transform;
             damageText.text = Mathf.RoundToInt(args.Damage).ToString();
+
+            if (playerTeam != null && args.Team == playerTeam)
+                damageText.color = Color.red;
         }
     }
 }

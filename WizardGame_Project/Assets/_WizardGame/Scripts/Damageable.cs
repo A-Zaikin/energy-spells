@@ -18,7 +18,7 @@ namespace WizardGame
 
             health.Value -= damage;
 
-            OnDamageReceived?.Invoke(new DamageReceivedArgs(damage, transform.position));
+            OnDamageReceived?.Invoke(new DamageReceivedArgs(damage, transform.position, Team));
 
             return true;
         }
@@ -28,11 +28,13 @@ namespace WizardGame
     {
         public float Damage;
         public Vector3 Position;
+        public Team Team;
 
-        public DamageReceivedArgs(float damage, Vector3 position)
+        public DamageReceivedArgs(float damage, Vector3 position, Team team)
         {
             Damage = damage;
             Position = position;
+            Team = team;
         }
     }
 }
