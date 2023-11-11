@@ -242,7 +242,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   body: {fileID: 2641630330936245236}
-  speed: 10
+  parameters: {fileID: 4119017058479924119}
 --- !u!114 &4119017058479924119
 MonoBehaviour:
   m_ObjectHideFlags: 0

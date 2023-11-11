@@ -7,11 +7,14 @@ namespace WizardGame
     public class MoveTowardPlayer : MonoBehaviour
     {
         [SerializeField] private Rigidbody body;
-        [SerializeField] private float speed;
-        
+        [SerializeField] private ParameterContainer parameters;
+
         private void FixedUpdate()
         {
-            if (body != null && Target.Current != null)
+            if (body != null &&
+                Target.Current != null &&
+                parameters != null &&
+                parameters.Get(ParameterType.Speed, out var speed))
             {
                 var direction = (Target.Current.transform.position - body.position).OnlyXz().normalized;
                 body.velocity = speed * direction;
