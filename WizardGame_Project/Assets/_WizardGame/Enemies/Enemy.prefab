@@ -99,9 +99,10 @@ GameObject:
   - component: {fileID: 8065614522731823526}
   - component: {fileID: 2641630330936245236}
   - component: {fileID: 584115664617168247}
-  - component: {fileID: 5615542071073958408}
   - component: {fileID: 4119017058479924119}
   - component: {fileID: 604372892065524979}
+  - component: {fileID: 8266498454338459532}
+  - component: {fileID: 8243139773730042784}
   m_Layer: 6
   m_Name: Enemy
   m_TagString: Untagged
@@ -242,20 +243,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   body: {fileID: 2641630330936245236}
   speed: 10
---- !u!114 &5615542071073958408
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2262987477988610387}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 34193fadb9bb0c1449bd9f7228e05221, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  parameters: {fileID: 4119017058479924119}
-  team: {fileID: 604372892065524979}
 --- !u!114 &4119017058479924119
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -280,3 +267,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d314194219b40ffaea29ecce5db1b81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8266498454338459532
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2262987477988610387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22b025256e917eb4680230d3d3e344de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parameters: {fileID: 4119017058479924119}
+  team: {fileID: 604372892065524979}
+--- !u!114 &8243139773730042784
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2262987477988610387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b651d873bf8269e4aa873e0c1d76cc09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: {fileID: 2262987477988610390}

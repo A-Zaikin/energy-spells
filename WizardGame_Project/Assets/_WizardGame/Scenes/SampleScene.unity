@@ -5301,6 +5301,7 @@ GameObject:
   - component: {fileID: 1715090494}
   - component: {fileID: 1715090495}
   - component: {fileID: 1715090496}
+  - component: {fileID: 1715090497}
   m_Layer: 6
   m_Name: Damageable
   m_TagString: Untagged
@@ -5401,6 +5402,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1715090497
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1715090491}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33064e4bd77044cba7f9ecb8f5c83cbe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: {fileID: 1715090494}
 --- !u!4 &1725339135 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -6874584590210671055, guid: 0ac890583d9992f449e97eec42cd9ef6,
@@ -5460,6 +5474,7 @@ MonoBehaviour:
   - {fileID: 1179670986}
   damage: 5
   team: {fileID: 11400000, guid: 620f7e6a3d3413d48a32b099ecaf140f, type: 2}
+  attackSpeed: 3
 --- !u!1 &1781717516
 GameObject:
   m_ObjectHideFlags: 0

@@ -9,15 +9,21 @@ namespace WizardGame
 
         private float value;
 
+        public event Action OnDeath;
+
         public float Value
         {
             get => value;
             set
             {
-                this.value = Mathf.Clamp(value, 0, max);
+                var newValue = Mathf.Clamp(value, 0, max);
+                if (this.value == newValue)
+                    return;
+
+                this.value = newValue;
 
                 if (this.value == 0)
-                    Destroy(gameObject);
+                    OnDeath?.Invoke();
             }
         }
 

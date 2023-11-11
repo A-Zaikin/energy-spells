@@ -13,6 +13,7 @@ namespace WizardGame
         [SerializeField] private List<LifecycleEvents> startingEnemies;
         [SerializeField] private float damage;
         [SerializeField] private Team team;
+        [SerializeField] private float attackSpeed;
 
         private void Start()
         {
@@ -36,7 +37,13 @@ namespace WizardGame
         private void SetupEnemy(LifecycleEvents enemy)
         {
             if (enemy.TryGetComponent<ParameterContainer>(out var parameters))
-                parameters.SetupWithValues(new() { [ParameterType.Damage] = damage });
+            {
+                parameters.SetupWithValues(new()
+                {
+                    [ParameterType.Damage] = damage,
+                    [ParameterType.FireRate] = attackSpeed
+                });
+            }
 
             if (enemy.TryGetComponent<TeamContainer>(out var teamContainer))
                 teamContainer.Setup(team);
