@@ -17,12 +17,15 @@ namespace WizardGame
         [SerializeField] private float radius;
 
         [SerializeField] private Team team;
+        [SerializeField] private float restTimeBetweenWaves;
 
         private EventCounter whenAllDestroyed;
 
         private int waveCount;
         private float damage;
         private float movementSpeed;
+
+        private readonly Timer restTimer = new();
 
         private void Start()
         {
@@ -35,7 +38,7 @@ namespace WizardGame
         private void SpawnNewWave()
         {
             whenAllDestroyed = new EventCounter();
-            whenAllDestroyed.OnCompleted += SpawnNewWave;
+            whenAllDestroyed.OnCompleted += Rest;
 
             var enemyCount = startingEnemyCount;
             for (int i = 0, count = waveCount; i < count; i++)
@@ -82,6 +85,12 @@ namespace WizardGame
 
             if (whenAllDestroyed != null)
                 enemy.OnDestroyed += whenAllDestroyed.Subscribe();
+        }
+
+        private void Rest()
+        {
+            restTimer.SetTimeout(restTimeBetweenWaves);
+            restTimer.Expired += SpawnNewWave;
         }
     }
 }
