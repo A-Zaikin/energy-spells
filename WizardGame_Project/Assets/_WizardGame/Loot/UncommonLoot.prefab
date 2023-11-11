@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2476107102661475679}
   - component: {fileID: -1352605942970379464}
   - component: {fileID: 6290350502474286796}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: UncommonLoot
   m_TagString: Untagged
   m_Icon: {fileID: 0}

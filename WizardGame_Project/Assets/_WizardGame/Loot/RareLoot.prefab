@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2476107102661475679}
   - component: {fileID: -7657451052369499575}
   - component: {fileID: 5631580659862985214}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: RareLoot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
