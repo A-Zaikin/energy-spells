@@ -2554,7 +2554,7 @@ GameObject:
   - component: {fileID: 779903984}
   - component: {fileID: 779903983}
   - component: {fileID: 779903982}
-  m_Layer: 6
+  m_Layer: 10
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4658,10 +4658,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44925a47103ab51429fd2df352cb8003, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyCountMultiplier: 1.1
+  enemyCountAdditive: 1
   startingEnemyCount: 3
-  startingDamage: 5
-  startingMovementSpeed: 6
+  startingDamage: 3
+  startingMovementSpeed: 1
   enemyPrefab: {fileID: 5068445393167210202, guid: 83b94403d4962254f8d5728c4414ffa8,
     type: 3}
   radius: 10

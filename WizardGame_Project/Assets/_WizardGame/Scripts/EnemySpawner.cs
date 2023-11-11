@@ -7,7 +7,7 @@ namespace WizardGame
 {
     public class EnemySpawner : MonoBehaviour
     {
-        [SerializeField] private float enemyCountMultiplier;
+        [SerializeField] private int enemyCountAdditive;
         [SerializeField] private int startingEnemyCount;
 
         [SerializeField] private float startingDamage;
@@ -40,17 +40,15 @@ namespace WizardGame
             whenAllDestroyed = new EventCounter();
             whenAllDestroyed.OnCompleted += Rest;
 
-            var enemyCount = startingEnemyCount;
-            for (int i = 0, count = waveCount; i < count; i++)
-                enemyCount = Mathf.RoundToInt(enemyCount * enemyCountMultiplier);
+            var enemyCount = startingEnemyCount + waveCount * enemyCountAdditive;
 
             for (var i = 0; i < enemyCount; i++)
             {
                 SpawnEnemy();
             }
 
-            damage *= 1.1f;
-            movementSpeed *= 1.1f;
+            damage *= 1.08f;
+            movementSpeed *= 1.08f;
 
             waveCount++;
         }
