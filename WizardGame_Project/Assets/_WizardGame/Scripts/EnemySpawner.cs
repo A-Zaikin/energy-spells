@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Serialization;
 using WizardGame.Data;
 using WizardGame.Utility;
 using Random = UnityEngine.Random;
@@ -8,6 +7,8 @@ namespace WizardGame
 {
     public class EnemySpawner : MonoBehaviour
     {
+        public static EnemySpawner Current;
+
         [SerializeField] private LevelData level;
         
         [SerializeField] private float radius;
@@ -20,6 +21,13 @@ namespace WizardGame
         private int waveCount;
 
         private readonly Timer restTimer = new();
+
+        public int WaveCount => waveCount;
+
+        private void Awake()
+        {
+            Current = this;
+        }
 
         private void Start()
         {
