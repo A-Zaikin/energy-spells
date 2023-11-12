@@ -23,7 +23,7 @@ namespace WizardGame.UI
                 image.raycastTarget = true;
 
             if (canvas != null)
-                canvas.sortingOrder = 1;
+                canvas.overrideSorting = false;
 
             if (text != null)
             {
@@ -40,7 +40,10 @@ namespace WizardGame.UI
                 image.raycastTarget = false;
 
             if (canvas != null)
-                canvas.sortingOrder = 2;
+            {
+                canvas.overrideSorting = true;
+                canvas.sortingOrder = 1;
+            }
 
             startPosition = transform.position;
         }
@@ -56,7 +59,7 @@ namespace WizardGame.UI
                 image.raycastTarget = true;
 
             if (canvas != null)
-                canvas.sortingOrder = 1;
+                canvas.overrideSorting = false;
 
             transform.position = startPosition;
         }
