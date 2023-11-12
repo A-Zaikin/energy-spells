@@ -16,6 +16,15 @@ namespace WizardGame
                 this.parameters[type] = value;
         }
 
+        public void Setup(ParameterContainer container)
+        {
+            if (parameters == null)
+                return;
+
+            foreach (var (type, value) in container.parameters)
+                parameters[type] = value;
+        }
+
         public void SetupWithValues(Dictionary<ParameterType, float> parameters)
         {
             if (parameters == null)

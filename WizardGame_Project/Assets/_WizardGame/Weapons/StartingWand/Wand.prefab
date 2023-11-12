@@ -41,6 +41,9 @@ GameObject:
   m_Component:
   - component: {fileID: 6792090047564353438}
   - component: {fileID: 5865293490098371336}
+  - component: {fileID: 2890105264484518549}
+  - component: {fileID: 4120341328508893808}
+  - component: {fileID: 1209272730039021550}
   m_Layer: 0
   m_Name: Wand
   m_TagString: Untagged
@@ -77,9 +80,48 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30afe394922a5e54c9e80ae50ee65544, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  core: {fileID: 1209272730039021550}
+  parameters: {fileID: 2890105264484518549}
+--- !u!114 &2890105264484518549
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6792090047564353439}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a0ee850e48b44b684c9e3df48287e5b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4120341328508893808
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6792090047564353439}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d314194219b40ffaea29ecce5db1b81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1209272730039021550
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6792090047564353439}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dbdb720028141419101fc5369535760, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   projectilePrefab: {fileID: 7411610404081919188, guid: 96ffafcb62eb7cf44a798684e4f34ae4,
     type: 3}
   firePoint: {fileID: 2528152166313936652}
+  parameters: {fileID: 2890105264484518549}
   team: {fileID: 11400000, guid: 7347946b488398f4bac577e7e86eb67b, type: 2}
 --- !u!1 &6792090048787874208
 GameObject:

@@ -12,5 +12,10 @@ namespace WizardGame
         {
             Value = team;
         }
+
+        public void Setup(TeamContainer team)
+        {
+            Value = team.Value;
+        }
     }
 }
