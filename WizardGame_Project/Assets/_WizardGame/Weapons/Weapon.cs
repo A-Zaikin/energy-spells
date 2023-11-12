@@ -14,8 +14,8 @@ namespace WizardGame
         [SerializeField] private GameObject firePoint;
         [SerializeField] private Team team;
 
-
         private float timeSinceLastShot;
+        private float pelletCountAdditive;
 
         public Dictionary<ParameterType, Modifiable> Parameters { get; } = new();
 
@@ -78,7 +78,10 @@ namespace WizardGame
                 if (Parameters.TryGetValue(ParameterType.PelletCount, out var pellets) &&
                     Parameters.TryGetValue(ParameterType.PelletSpread, out var pelletSpread))
                 {
-                    var pelletCount = Mathf.RoundToInt(pellets);
+                    pelletCountAdditive += pellets;
+                    var pelletCount = Mathf.FloorToInt(pelletCountAdditive);
+                    pelletCountAdditive -= pelletCount;
+
                     if (pelletCount % 2 == 0)
                     {
                         for (var i = 0; i < pelletCount; i++)
