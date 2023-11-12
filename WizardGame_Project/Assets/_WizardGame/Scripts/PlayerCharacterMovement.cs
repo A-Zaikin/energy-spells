@@ -9,7 +9,8 @@ namespace WizardGame
         [SerializeField] private Animator animator;
         [SerializeField, Range(0, 1)] private float directionInterpolation;
         [SerializeField] private float acceleration;
-
+        [SerializeField] private float arenaSize;
+        
         private Vector2 input;
         private bool hasInput;
 
@@ -47,7 +48,19 @@ namespace WizardGame
 
             if (hasInput)
             {
-                transform.position += speed * Time.fixedDeltaTime * movement.AsXz();
+                var newPosition = transform.position + speed * Time.fixedDeltaTime * movement.AsXz();
+
+                if (newPosition.x > arenaSize / 2)
+                    newPosition.x = arenaSize / 2;
+                if (newPosition.x < -arenaSize / 2)
+                    newPosition.x = -arenaSize / 2;
+                if (newPosition.z > arenaSize / 2)
+                    newPosition.z = arenaSize / 2;
+                if (newPosition.z < -arenaSize / 2)
+                    newPosition.z = -arenaSize / 2;
+
+                transform.position = newPosition;
+
                 transform.rotation = Quaternion.Lerp(
                     transform.rotation,
                     Quaternion.LookRotation(movement.AsXz()),

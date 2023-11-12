@@ -13,11 +13,11 @@ namespace WizardGame
         {
             Current = this;
 
-            for (int i = 0, count = 30; i < count; i++)
-            {
-                var mod = new WeaponMod(Quality.Rare);
-                WeaponMods.Add(mod);
-            }
+            // for (int i = 0, count = 30; i < count; i++)
+            // {
+            //     var mod = new WeaponMod(Quality.Rare);
+            //     WeaponMods.Add(mod);
+            // }
         }
     }
 }
