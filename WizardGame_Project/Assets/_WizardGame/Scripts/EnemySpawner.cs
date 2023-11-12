@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 using WizardGame.Data;
 using WizardGame.Utility;
 using Random = UnityEngine.Random;
@@ -7,13 +8,8 @@ namespace WizardGame
 {
     public class EnemySpawner : MonoBehaviour
     {
-        [SerializeField] private int enemyCountAdditive;
-        [SerializeField] private int startingEnemyCount;
-
-        [SerializeField] private float startingDamage;
-        [SerializeField] private float startingMovementSpeed;
-
-        [SerializeField] private LifecycleEvents enemyPrefab;
+        [SerializeField] private LevelData level;
+        
         [SerializeField] private float radius;
 
         [SerializeField] private Team team;
@@ -22,67 +18,59 @@ namespace WizardGame
         private EventCounter whenAllDestroyed;
 
         private int waveCount;
-        private float damage;
-        private float movementSpeed;
 
         private readonly Timer restTimer = new();
 
         private void Start()
         {
-            damage = startingDamage;
-            movementSpeed = startingMovementSpeed;
-
             SpawnNewWave();
         }
 
         private void SpawnNewWave()
         {
+            if (level == null || waveCount < 0)
+                return;
+
             whenAllDestroyed = new EventCounter();
             whenAllDestroyed.OnCompleted += Rest;
 
-            var enemyCount = startingEnemyCount + waveCount * enemyCountAdditive;
+            waveCount %= level.Waves.Count;
 
-            for (var i = 0; i < enemyCount; i++)
+            var wave = level.Waves[waveCount];
+            foreach (var enemyType in wave.Enemies)
             {
-                SpawnEnemy();
+                for (int i = 0, count = enemyType.Count; i < count; i++)
+                {
+                    SpawnEnemy(enemyType.EnemyData);
+                }
             }
-
-            damage *= 1.08f;
-            movementSpeed *= 1.08f;
 
             waveCount++;
         }
 
-        private void SpawnEnemy()
+        private void SpawnEnemy(EnemyData data)
         {
             var position = Random.insideUnitCircle * radius;
             
-            if (Spawner.Spawn(enemyPrefab, out var enemy))
+            if (Spawner.Spawn(data.Prefab, out var enemy))
             {
                 var enemyTransform = enemy.transform;
                 enemyTransform.position = enemyTransform.position.WithXz(position);
 
-                SetupEnemy(enemy);
+                SetupEnemy(enemy, data);
             }
         }
 
-        private void SetupEnemy(LifecycleEvents enemy)
+        private void SetupEnemy(GameObject enemy, EnemyData data)
         {
             if (enemy.TryGetComponent<ParameterContainer>(out var parameters))
-            {
-                parameters.SetupWithValues(new()
-                {
-                    [ParameterType.Damage] = damage,
-                    [ParameterType.FireRate] = 3,
-                    [ParameterType.Speed] = movementSpeed
-                });
-            }
+                parameters.SetupWithValues(data.StartingParameters);
 
             if (enemy.TryGetComponent<TeamContainer>(out var teamContainer))
                 teamContainer.Setup(team);
 
-            if (whenAllDestroyed != null)
-                enemy.OnDestroyed += whenAllDestroyed.Subscribe();
+            if (whenAllDestroyed != null && enemy.TryGetComponent<LifecycleEvents>(out var lifecycleEvents))
+                lifecycleEvents.OnDestroyed += whenAllDestroyed.Subscribe();
         }
 
         private void Rest()
