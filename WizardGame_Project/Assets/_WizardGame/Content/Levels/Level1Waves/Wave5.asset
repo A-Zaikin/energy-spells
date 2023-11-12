@@ -10,8 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d9aa1306117c4404ba7dfd2ec0eee84a, type: 3}
-  m_Name: Wave1
+  m_Name: Wave5
   m_EditorClassIdentifier: 
   <Enemies>k__BackingField:
-  - EnemyData: {fileID: 11400000, guid: ca34969c84e7b2742b6d27a912118c66, type: 2}
-    Count: 3
+  - EnemyData: {fileID: 11400000, guid: 2d50cf1677e3b1b4a903f9c52fba4e81, type: 2}
+    Count: 5
+  - EnemyData: {fileID: 11400000, guid: 439a42178cd3f6646a0d99fa7f101882, type: 2}
+    Count: 1
+  - EnemyData: {fileID: 11400000, guid: 1a3e7c20dc6769f4d8c55685fe2f7aad, type: 2}
+    Count: 2

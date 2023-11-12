@@ -15,5 +15,5 @@ MonoBehaviour:
   <Enemies>k__BackingField:
   - EnemyData: {fileID: 11400000, guid: ca34969c84e7b2742b6d27a912118c66, type: 2}
     Count: 5
-  - EnemyData: {fileID: 11400000, guid: 2d50cf1677e3b1b4a903f9c52fba4e81, type: 2}
+  - EnemyData: {fileID: 11400000, guid: a56dd657862dbc049ae61d1a69d9c181, type: 2}
     Count: 2
