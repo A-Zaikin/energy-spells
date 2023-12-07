@@ -9,6 +9,6 @@ EditorBuildSettings:
     path: Assets/_WizardGame/Scenes/MainMenu.unity
     guid: 088457e700858c442923b760143e328f
   - enabled: 1
-    path: Assets/_WizardGame/Scenes/SampleScene.unity
+    path: Assets/_WizardGame/Scenes/Gameplay.unity
     guid: 99c9720ab356a0642a771bea13969a05
   m_configObjects: {}
