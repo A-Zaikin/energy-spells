@@ -7,11 +7,15 @@ namespace WizardGame
     {
         public static Health Health { get; private set; }
 
+        public static ManaContainer Mana { get; private set; }
+
         [SerializeField] private Health health;
+        [SerializeField] private ManaContainer mana;
 
         private void Awake()
         {
             Health = health;
+            Mana = mana;
         }
     }
 }

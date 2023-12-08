@@ -36,3 +36,5 @@ MonoBehaviour:
       Value: 15
     - Key: 9
       Value: 5
+    - Key: 10
+      Value: 2

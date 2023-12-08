@@ -14,17 +14,30 @@ namespace WizardGame
 
         private float timeSinceLastShot;
         private float pelletCountAdditive;
+        private ManaContainer manaContainer;
 
         public bool CanShoot { get; set; }
+
+        public void Setup(ManaContainer manaContainer)
+        {
+            this.manaContainer = manaContainer;
+        }
 
         private void Update()
         {
             if (firePoint == null)
                 return;
 
+            var hasManaCost = parameters.Get(ParameterType.ManaCost, out var manaCost);
+
+            var hasEnoughMana = manaContainer == null ||
+                !hasManaCost ||
+                manaContainer.Value > manaCost;
+
             if (CanShoot &&
                 parameters.Get(ParameterType.FireRate, out var fireRate) &&
-                timeSinceLastShot > 1 / fireRate)
+                timeSinceLastShot > 1 / fireRate &&
+                hasEnoughMana)
             {
                 var weaponAngle = Vector2.SignedAngle(Vector2.right, transform.forward.Xz());
 
@@ -60,6 +73,9 @@ namespace WizardGame
                 }
 
                 timeSinceLastShot = 0;
+
+                if (manaContainer != null && hasManaCost)
+                    manaContainer.Value -= manaCost;
             }
 
             timeSinceLastShot += Time.deltaTime;

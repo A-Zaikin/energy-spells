@@ -12,6 +12,7 @@ namespace WizardGame
         [SerializeField] private float offset;
         [SerializeField] private float height;
         [SerializeField, Range(0, 1)] private float interpolation;
+        [SerializeField] private ManaContainer playerManaContainer;
 
         private IReadOnlyList<WeaponData> weaponsData;
         private readonly Dictionary<WeaponData, GameObject> weaponModels = new();
@@ -25,7 +26,7 @@ namespace WizardGame
                 weaponModels[data] = Instantiate(data.Model, transform);
 
                 if (weaponModels[data].TryGetComponent<Weapon>(out var weapon))
-                    weapon.Setup(data);
+                    weapon.Setup(data, playerManaContainer);
             }
         }
 

@@ -19,7 +19,7 @@ namespace WizardGame
 
         private readonly List<Modification> modifications = new();
 
-        public void Setup(WeaponData data)
+        public void Setup(WeaponData data, ManaContainer manaContainer)
         {
             foreach (var (type, value) in data.StartingParameters)
             {
@@ -28,6 +28,9 @@ namespace WizardGame
 
             if (parameters != null)
                 parameters.Setup(Parameters);
+
+            if (core != null)
+                core.Setup(manaContainer);
         }
 
         private void Awake()
