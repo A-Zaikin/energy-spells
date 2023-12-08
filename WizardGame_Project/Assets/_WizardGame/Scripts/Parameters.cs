@@ -13,6 +13,7 @@ namespace WizardGame
         PelletSpread,
         Lifetime,
         ManaCost,
+        Intensity,
 
         // ReSharper disable once InconsistentNaming
         NUM

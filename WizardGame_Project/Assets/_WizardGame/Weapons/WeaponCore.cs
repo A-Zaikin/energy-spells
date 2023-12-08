@@ -75,7 +75,12 @@ namespace WizardGame
                 timeSinceLastShot = 0;
 
                 if (manaContainer != null && hasManaCost)
+                {
+                    if (parameters.Get(ParameterType.Intensity, out var intensity))
+                        manaCost *= intensity;
+
                     manaContainer.Value -= manaCost;
+                }
             }
 
             timeSinceLastShot += Time.deltaTime;
