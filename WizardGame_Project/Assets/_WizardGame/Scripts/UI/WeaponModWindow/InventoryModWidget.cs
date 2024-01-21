@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -30,8 +31,28 @@ namespace WizardGame.UI
                 text.text = "";
 
                 foreach (var modifier in mod.Modifiers)
-                    text.text += $"{modifier.Parameter}: {modifier.Value:0.##}\n";
+                    text.text += $"{ParamToString(modifier.Parameter)}: {modifier.Value:0.##}\n";
             }
+        }
+
+        private static string ParamToString(ParameterType type)
+        {
+            return type switch
+            {
+                ParameterType.Damage => "Damage",
+                ParameterType.FireRate => "Fire rate",
+                ParameterType.RandomSpread => "Spread",
+                ParameterType.Speed => "Speed",
+                ParameterType.AccelerationMultiplier => "Acceleration",
+                ParameterType.Gravity => "Gravity",
+                ParameterType.Bounces => "Bounces",
+                ParameterType.PelletCount => "Pellets",
+                ParameterType.PelletSpread => "Pellet spread",
+                ParameterType.Lifetime => "Lifetime",
+                ParameterType.ManaCost => "Mana cost",
+                ParameterType.Intensity => "Intensity",
+                _ => string.Empty,
+            };
         }
 
         public void OnBeginDrag(PointerEventData eventData)
